@@ -11,7 +11,7 @@ public class AccountService {
   }
 
   public void deposit(int amount) {
-    throw new UnsupportedOperationException("implement me!");
+    AccountTransaction transaction = new AccountTransaction(this.clockService.getDateTime(), amount);
   }
 
   public void printStatement(){
