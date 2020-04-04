@@ -15,5 +15,6 @@ class AccountTransactionShould {
     AccountTransaction accountTransaction = new AccountTransaction(timeOfTransaction, amount);
 
     assertEquals(amount, accountTransaction.amount);
+    assertEquals(timeOfTransaction, accountTransaction.dateTime);
   }
 }
