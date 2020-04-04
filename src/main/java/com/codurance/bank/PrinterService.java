@@ -1,5 +1,7 @@
 package com.codurance.bank;
 
+import java.util.stream.Stream;
+
 public interface PrinterService {
-  void printLine(String line);
+  void printStatement(Stream<AccountTransaction> fetch);
 }

@@ -13,11 +13,12 @@ import static org.mockito.Mockito.inOrder;
 
 @ExtendWith(MockitoExtension.class)
 public class AccountServiceShould {
-  @Mock
-  PrinterService printerService;
 
   @Mock
   ClockService clockService;
+
+  @Mock
+  ConsolePrinter consolePrinter;
 
   @Test
   void print_a_statement_with_deposits_and_withdrawals() {
@@ -29,8 +30,10 @@ public class AccountServiceShould {
             .willReturn(LocalDateTime.of(2020, 2, 3, 0, 0));
 
     // Act
+    PrinterService consolePrinterService = new ConsolePrinterService(consolePrinter);
+
     AccountTransactionRepository accountTransactionRepository = new AccountTransactionRepository();
-    AccountService accountService = new AccountService(printerService, clockService, accountTransactionRepository);
+    AccountService accountService = new AccountService(consolePrinterService, clockService, accountTransactionRepository);
 
     accountService.deposit(1000);
     accountService.withdraw(1500);
@@ -39,10 +42,10 @@ public class AccountServiceShould {
     accountService.printStatement();
 
     // Assert
-    InOrder inOrder = inOrder(printerService);
-    inOrder.verify(printerService).printLine("DATE       | AMOUNT | BALANCE ");
-    inOrder.verify(printerService).printLine("03/02/2020 |    600 |     100 ");
-    inOrder.verify(printerService).printLine("10/01/2020 |  -1500 |    -500 ");
-    inOrder.verify(printerService).printLine("06/01/2020 |   1000 |    1000 ");
+    InOrder inOrder = inOrder(consolePrinter);
+    inOrder.verify(consolePrinter).printLine("DATE       | AMOUNT | BALANCE ");
+    inOrder.verify(consolePrinter).printLine("03/02/2020 |    600 |     100 ");
+    inOrder.verify(consolePrinter).printLine("10/01/2020 |  -1500 |    -500 ");
+    inOrder.verify(consolePrinter).printLine("06/01/2020 |   1000 |    1000 ");
   }
 }

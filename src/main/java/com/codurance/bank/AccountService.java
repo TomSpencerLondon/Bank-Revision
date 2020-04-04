@@ -20,7 +20,7 @@ public class AccountService {
   }
 
   public void printStatement(){
-    this.printService.printLine("DATE       | AMOUNT | BALANCE ");
+    this.printService.printStatement(accountTransactionRepository.fetch());
   }
 
   public void withdraw(int amount) {
