@@ -29,7 +29,8 @@ public class AccountServiceShould {
             .willReturn(LocalDateTime.of(2020, 2, 3, 0, 0));
 
     // Act
-    AccountService accountService = new AccountService(printerService, clockService);
+    AccountTransactionRepository accountTransactionRepository = new AccountTransactionRepository();
+    AccountService accountService = new AccountService(printerService, clockService, accountTransactionRepository);
 
     accountService.deposit(1000);
     accountService.withdraw(1500);
