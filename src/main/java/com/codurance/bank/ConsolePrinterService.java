@@ -15,7 +15,6 @@ public class ConsolePrinterService implements PrinterService {
   @Override
   public void printStatement(Stream<AccountTransaction> accountTransactionStream){
     consolePrinter.printLine("DATE       | AMOUNT | BALANCE ");
-
     accountTransactionStream
             .sorted(Comparator.comparing(AccountTransaction::dateTime).reversed())
             .forEach(t -> {

@@ -57,23 +57,19 @@ class ConsolePrinterServiceShould {
   @Test
   void print_transactions_in_reverse_date_order() {
     float amount = 500.00f;
-    LocalDateTime dateTime = LocalDateTime.now();
-    LocalDateTime earlierDateTime = dateTime.minusDays(1);
-    when(accountTransaction.dateTime()).thenReturn(dateTime);
-    when(accountTransaction.amount()).thenReturn(amount);
-    when(earlierAccountTransaction.dateTime()).thenReturn(earlierDateTime);
-    when(earlierAccountTransaction.amount()).thenReturn(amount);
+    LocalDateTime dateTime = LocalDateTime.of(2020, 10, 2, 0, 0);
+    LocalDateTime earlierDateTime = LocalDateTime.of(2020, 10, 1, 0, 0);
+    AccountTransaction accountTransaction = new AccountTransaction(dateTime, amount);
+    AccountTransaction earlierAccountTransaction = new AccountTransaction(earlierDateTime, amount);
+
 
     ArrayList<AccountTransaction> list = new ArrayList<AccountTransaction>(Arrays.asList(accountTransaction, earlierAccountTransaction));
 
     consolePrinterService.printStatement(list.stream());
 
-    String formattedDate = accountTransaction.dateTime().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-    String earlierFormattedDate = earlierAccountTransaction.dateTime().format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-
     InOrder inOrder = inOrder(consolePrinter);
     inOrder.verify(consolePrinter).printLine("DATE       | AMOUNT | BALANCE ");
-    inOrder.verify(consolePrinter).printLine(formattedDate + " | 500.00 | 500.00 ");
-    inOrder.verify(consolePrinter).printLine(earlierFormattedDate + " | 500.00 | 500.00 ");
+    inOrder.verify(consolePrinter).printLine("02/10/2020 | 500.00 | 500.00 ");
+    inOrder.verify(consolePrinter).printLine("01/10/2020 | 500.00 | 500.00 ");
   }
 }
