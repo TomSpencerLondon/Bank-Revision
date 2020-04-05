@@ -11,4 +11,12 @@ public class AccountTransaction {
     this.dateTime = dateTime;
     this.amount = amount;
   }
+
+  public LocalDateTime dateTime(){
+    return dateTime;
+  }
+
+  public float amount(){
+    return amount;
+  }
 }
