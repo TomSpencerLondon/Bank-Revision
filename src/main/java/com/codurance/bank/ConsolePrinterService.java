@@ -21,10 +21,8 @@ public class ConsolePrinterService implements PrinterService {
     consolePrinter.printLine("DATE       | AMOUNT | BALANCE ");
 
     List<AccountTransaction> accountTransactions = accountTransactionStream.collect(Collectors.toList());
-    Collections.reverse(accountTransactions);
     for (AccountTransaction accountTransaction : accountTransactions){
       balance += accountTransaction.amount();
-      System.out.println(balance);
       accountTransaction.set(balance);
     }
 

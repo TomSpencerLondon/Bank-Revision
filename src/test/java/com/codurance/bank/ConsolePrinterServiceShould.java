@@ -59,17 +59,19 @@ class ConsolePrinterServiceShould {
     float amount = 500.00f;
     LocalDateTime dateTime = LocalDateTime.of(2020, 10, 2, 0, 0);
     LocalDateTime earlierDateTime = LocalDateTime.of(2020, 10, 1, 0, 0);
-    AccountTransaction accountTransaction = new AccountTransaction(dateTime, -amount);
+    AccountTransaction accountTransaction = new AccountTransaction(dateTime, amount);
     AccountTransaction earlierAccountTransaction = new AccountTransaction(earlierDateTime, amount);
 
 
-    ArrayList<AccountTransaction> list = new ArrayList<AccountTransaction>(Arrays.asList(accountTransaction, earlierAccountTransaction));
+    ArrayList<AccountTransaction> list = new ArrayList<AccountTransaction>();
+    list.add(earlierAccountTransaction);
+    list.add(accountTransaction);
 
     consolePrinterService.printStatement(list.stream());
 
     InOrder inOrder = inOrder(consolePrinter);
     inOrder.verify(consolePrinter).printLine("DATE       | AMOUNT | BALANCE ");
-    inOrder.verify(consolePrinter).printLine("02/10/2020 | -500.00 | 0.00 ");
+    inOrder.verify(consolePrinter).printLine("02/10/2020 | 500.00 | 1000.00 ");
     inOrder.verify(consolePrinter).printLine("01/10/2020 | 500.00 | 500.00 ");
   }
 }
