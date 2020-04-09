@@ -1,4 +1,4 @@
-package com.codurance.bank;
+package com.codurance.bank.utils;
 
 import java.time.LocalDateTime;
 

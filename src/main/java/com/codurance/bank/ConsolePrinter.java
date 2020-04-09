@@ -1,5 +1,5 @@
 package com.codurance.bank;
 
-public interface ConsolePrinter {
-  void printLine(String line);
+public abstract class ConsolePrinter {
+  public abstract void printLine(String line);
 }

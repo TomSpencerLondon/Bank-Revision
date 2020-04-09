@@ -1,4 +1,10 @@
-package com.codurance.bank;
+package com.codurance.bank.service;
+
+import com.codurance.bank.PrinterService;
+import com.codurance.bank.domain.AccountTransaction;
+import com.codurance.bank.domain.AccountTransactionFactory;
+import com.codurance.bank.repository.AccountTransactionRepository;
+import com.codurance.bank.utils.ClockService;
 
 public class AccountService {
 

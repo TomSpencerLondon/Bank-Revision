@@ -1,5 +1,6 @@
-package com.codurance.bank;
+package com.codurance.bank.domain;
 
+import com.codurance.bank.domain.AccountTransaction;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;

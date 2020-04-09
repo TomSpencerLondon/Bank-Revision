@@ -1,4 +1,6 @@
-package com.codurance.bank;
+package com.codurance.bank.domain;
+
+import com.codurance.bank.utils.ClockService;
 
 public class AccountTransactionFactory {
   private final ClockService clockService;

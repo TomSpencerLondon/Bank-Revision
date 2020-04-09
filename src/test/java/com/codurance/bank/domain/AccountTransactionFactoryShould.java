@@ -1,5 +1,8 @@
-package com.codurance.bank;
+package com.codurance.bank.domain;
 
+import com.codurance.bank.domain.AccountTransaction;
+import com.codurance.bank.domain.AccountTransactionFactory;
+import com.codurance.bank.utils.ClockService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

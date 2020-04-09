@@ -1,7 +1,8 @@
-package com.codurance.bank;
+package com.codurance.bank.repository;
+
+import com.codurance.bank.domain.AccountTransaction;
 
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
@@ -18,7 +19,6 @@ public class SQLAccountTransactionRepository implements AccountTransactionReposi
              PreparedStatement preparedStatement = connection
                      .prepareStatement("INSERT INTO Transactions (time_stamp, amount)\n"+
                              "VALUES (?, ?)");){
-            System.out.println(transaction.amount);
             preparedStatement.setTimestamp(1, Timestamp.valueOf(transaction.dateTime));
             preparedStatement.setFloat(2, transaction.amount);
             preparedStatement.execute();

@@ -1,17 +1,21 @@
-package com.codurance.bank;
+package com.codurance.bank.service;
 
-import org.junit.jupiter.api.AfterEach;
+import com.codurance.bank.repository.AccountTransactionRepository;
+import com.codurance.bank.repository.SQLAccountTransactionRepository;
+import com.codurance.bank.utils.ClockService;
+import com.codurance.bank.ConsolePrinterService;
+import com.codurance.bank.PrinterService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+import com.codurance.bank.ConsolePrinter;
 
-import java.sql.PreparedStatement;
 import java.time.LocalDateTime;
 
 import static org.mockito.BDDMockito.given;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.inOrder;
 
 @ExtendWith(MockitoExtension.class)
 public class AccountServiceShould {
@@ -24,7 +28,6 @@ public class AccountServiceShould {
 
   @Test
   void print_a_statement_with_deposits_and_withdrawals() {
-
     // Arrange
     given(clockService.getDateTime())
             .willReturn(LocalDateTime.of(2020, 1, 6, 0, 0))

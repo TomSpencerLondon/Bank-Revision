@@ -1,6 +1,7 @@
 package com.codurance.bank;
 
-import javax.sql.rowset.spi.TransactionalWriter;
+import com.codurance.bank.domain.AccountTransaction;
+
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.stream.Collectors;
