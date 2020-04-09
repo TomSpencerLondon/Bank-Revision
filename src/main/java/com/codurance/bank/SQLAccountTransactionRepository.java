@@ -34,21 +34,16 @@ public class SQLAccountTransactionRepository implements AccountTransactionReposi
 
         try (Connection connection = DriverManager.getConnection(
                 CONNECTION);
-
              PreparedStatement preparedStatement = connection
                      .prepareStatement("SELECT time_stamp, amount FROM Transactions");
 
              ResultSet resultSet = preparedStatement.executeQuery()){
             while (resultSet.next()){
-                System.out.println("This is amount " + resultSet.getInt(2));
-
-                System.out.println(resultSet.getTimestamp(1));
-                //                LocalDateTime dateTime = LocalDateTime.of(resultSet.getTimestamp(1));
-//                transactionList.add(new AccountTransaction());
+                transactionList.add(new AccountTransaction(resultSet.getTimestamp(1).toLocalDateTime(), resultSet.getInt(2)));
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;
+        return transactionList.stream();
     }
 }
