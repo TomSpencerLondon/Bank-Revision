@@ -6,6 +6,8 @@ import com.codurance.bank.domain.AccountTransactionFactory;
 import com.codurance.bank.repository.AccountTransactionRepository;
 import com.codurance.bank.utils.ClockService;
 
+import java.io.IOException;
+
 public class AccountService {
 
   private final PrinterService printService;
@@ -20,7 +22,7 @@ public class AccountService {
     this.accountTransactionRepository = accountTransactionRepository;
   }
 
-  public void deposit(int amount) {
+  public void deposit(int amount) throws IOException {
     AccountTransaction transaction = accountTransactionFactory.newDeposit(amount);
     this.accountTransactionRepository.store(transaction);
   }
@@ -29,7 +31,7 @@ public class AccountService {
     this.printService.printStatement(accountTransactionRepository.fetch());
   }
 
-  public void withdraw(int amount) {
+  public void withdraw(int amount) throws IOException {
     AccountTransaction transaction = accountTransactionFactory.newWithdrawal(amount);
     this.accountTransactionRepository.store(transaction);
   }

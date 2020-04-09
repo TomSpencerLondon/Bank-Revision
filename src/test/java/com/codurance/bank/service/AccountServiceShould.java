@@ -1,6 +1,7 @@
 package com.codurance.bank.service;
 
 import com.codurance.bank.repository.AccountTransactionRepository;
+import com.codurance.bank.repository.MongoAccountTransactionRepository;
 import com.codurance.bank.repository.SQLAccountTransactionRepository;
 import com.codurance.bank.utils.ClockService;
 import com.codurance.bank.ConsolePrinterService;
@@ -13,6 +14,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import com.codurance.bank.ConsolePrinter;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -33,7 +35,7 @@ public class AccountServiceShould {
   ConsolePrinter consolePrinter;
 
   @Test
-  void print_a_statement_with_deposits_and_withdrawals() {
+  void print_a_statement_with_deposits_and_withdrawals() throws IOException {
     // Arrange
     given(clockService.getDateTime())
             .willReturn(LocalDateTime.of(2020, 1, 6, 0, 0))
@@ -43,7 +45,7 @@ public class AccountServiceShould {
     // Act
     PrinterService consolePrinterService = new ConsolePrinterService(consolePrinter);
 
-    AccountTransactionRepository accountTransactionRepository = new SQLAccountTransactionRepository();
+    AccountTransactionRepository accountTransactionRepository = new MongoAccountTransactionRepository();
     AccountService accountService = new AccountService(consolePrinterService, clockService, accountTransactionRepository);
 
     accountService.deposit(1000);
@@ -62,9 +64,9 @@ public class AccountServiceShould {
 
   @AfterEach
   void tearDown() throws SQLException {
-    Connection connection = DriverManager.getConnection(CONNECTION);
-    PreparedStatement preparedStatement = connection.prepareStatement(
-            "DELETE FROM Transactions");
-    preparedStatement.execute();
+//    Connection connection = DriverManager.getConnection(CONNECTION);
+//    PreparedStatement preparedStatement = connection.prepareStatement(
+//            "DELETE FROM Transactions");
+//    preparedStatement.execute();
   }
 }
