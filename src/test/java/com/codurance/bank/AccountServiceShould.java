@@ -32,7 +32,7 @@ public class AccountServiceShould {
     // Act
     PrinterService consolePrinterService = new ConsolePrinterService(consolePrinter);
 
-    AccountTransactionRepository accountTransactionRepository = new AccountTransactionRepository();
+    AccountTransactionRepository accountTransactionRepository = new SQLAccountTransactionRepository();
     AccountService accountService = new AccountService(consolePrinterService, clockService, accountTransactionRepository);
 
     accountService.deposit(1000);

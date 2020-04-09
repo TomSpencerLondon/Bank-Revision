@@ -16,7 +16,7 @@ class AccountTransactionRepositoryShould {
 
     float amount = 1500f;
     AccountTransaction transactionToStore = new AccountTransaction(dateTime, amount);
-    AccountTransactionRepository accountTransactionRepository = new AccountTransactionRepository();
+    AccountTransactionRepository accountTransactionRepository = new InMemoryAccountTransactionRepository();
 
     accountTransactionRepository.store(transactionToStore);
 

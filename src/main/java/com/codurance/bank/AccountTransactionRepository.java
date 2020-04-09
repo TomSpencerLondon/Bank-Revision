@@ -1,20 +1,9 @@
 package com.codurance.bank;
 
-import java.util.ArrayList;
 import java.util.stream.Stream;
 
-public class AccountTransactionRepository {
-  private ArrayList<AccountTransaction> transactions;
+public interface AccountTransactionRepository {
+    void store(AccountTransaction transaction);
 
-  public AccountTransactionRepository() {
-    this.transactions = new ArrayList<AccountTransaction>();
-  }
-
-  public void store(AccountTransaction transaction) {
-    transactions.add(transaction);
-  }
-
-  public Stream<AccountTransaction> fetch() {
-    return transactions.stream();
-  }
+    Stream<AccountTransaction> fetch();
 }
