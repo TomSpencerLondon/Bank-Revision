@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 
 public class SQLAccountTransactionRepository implements AccountTransactionRepository {
 
-    public static final String CONNECTION = "jdbc:mysql://localhost:3306/bank?user=root&password=password&serverTimezone=UTC";
+    private static final String CONNECTION = "jdbc:mysql://localhost:3306/bank?user=root&password=password&serverTimezone=UTC";
 
     @Override
     public void store(AccountTransaction transaction) {

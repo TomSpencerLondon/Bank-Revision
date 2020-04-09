@@ -5,6 +5,7 @@ import com.codurance.bank.repository.SQLAccountTransactionRepository;
 import com.codurance.bank.utils.ClockService;
 import com.codurance.bank.ConsolePrinterService;
 import com.codurance.bank.PrinterService;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InOrder;
@@ -12,6 +13,10 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import com.codurance.bank.ConsolePrinter;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 import static org.mockito.BDDMockito.given;
@@ -19,6 +24,7 @@ import static org.mockito.Mockito.inOrder;
 
 @ExtendWith(MockitoExtension.class)
 public class AccountServiceShould {
+  private static final String CONNECTION = "jdbc:mysql://localhost:3306/bank?user=root&password=password&serverTimezone=UTC";
 
   @Mock
   ClockService clockService;
@@ -52,5 +58,13 @@ public class AccountServiceShould {
     inOrder.verify(consolePrinter).printLine("03/02/2020 | 600.00 | 100.00 ");
     inOrder.verify(consolePrinter).printLine("10/01/2020 | -1500.00 | -500.00 ");
     inOrder.verify(consolePrinter).printLine("06/01/2020 | 1000.00 | 1000.00 ");
+  }
+
+  @AfterEach
+  void tearDown() throws SQLException {
+    Connection connection = DriverManager.getConnection(CONNECTION);
+    PreparedStatement preparedStatement = connection.prepareStatement(
+            "DELETE FROM Transactions");
+    preparedStatement.execute();
   }
 }
