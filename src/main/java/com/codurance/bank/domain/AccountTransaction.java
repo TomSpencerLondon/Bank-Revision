@@ -2,11 +2,13 @@ package com.codurance.bank.domain;
 
 import java.time.LocalDateTime;
 
+
 public class AccountTransaction {
 
   public final LocalDateTime dateTime;
   public final float amount;
   private float balance;
+
 
   public AccountTransaction(LocalDateTime dateTime, float amount) {
     this.dateTime = dateTime;
